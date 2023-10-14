@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchBlogsByUserIdAction } from "../../actions/blogAction";
 import * as timeago from 'timeago.js';
+import SimpleBackdrop from "../../components/Backdrop";
 
 const UserProfile = () => {
   const dispatch = useDispatch()
@@ -22,6 +23,7 @@ const UserProfile = () => {
   return (
     <>
       <Topbar />
+      <SimpleBackdrop />
       <div className="m-auto max-width-1 my-2">
         <Status fetchUserBlogsById={fetchUserBlogsById}/>
           {

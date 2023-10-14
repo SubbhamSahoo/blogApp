@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBlogsAction } from "../../actions/blogAction";
 import * as timeago from 'timeago.js';
+import SimpleBackdrop from "../../components/Backdrop";
 
 const Home = () => {
   const {blogs} = useSelector(state=>state.blogs)
@@ -16,6 +17,7 @@ const Home = () => {
   return (
     <>
       <Topbar />
+      <SimpleBackdrop />
       <div className="m-auto content max-width-1 my-2">
         <div className="content-left">
           <h1>The heaven for bloggers</h1>

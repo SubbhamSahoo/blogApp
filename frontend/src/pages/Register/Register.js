@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink, Navigate } from "react-router-dom";
 import {useDispatch} from "react-redux"
 import { userRegisterAction } from "../../actions/userAction";
+import SimpleBackdrop from "../../components/Backdrop";
 
 
 const Register = () => {
@@ -35,6 +36,7 @@ const Register = () => {
 
   return (
     <>
+     <SimpleBackdrop />
       <section class="vh-100" style={{ backgroundColor: "#eee" }}>
         <div class="container h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBlogByIdAction } from "../../actions/blogAction";
 import { Avatar } from "@mui/material";
 import { addCommentAction } from "../../actions/commentAction";
+import SimpleBackdrop from "../../components/Backdrop";
 
 const Blogpost = () => {
     const id = useParams().id
@@ -30,6 +31,7 @@ const Blogpost = () => {
     return(
         <>
         <Topbar />
+        <SimpleBackdrop />
         <div className="m-auto blogpostContent max-width-1 my-2">
             <div className="blogpostContent-left">
             <h1>{blogData?.blogs?.blog.title}</h1>

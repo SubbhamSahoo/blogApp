@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Topbar from "../../components/Topbar";
 import { contactUsAction } from "../../actions/contactAction";
 import { useDispatch } from "react-redux";
+import SimpleBackdrop from "../../components/Backdrop";
 
 const Contact = () => {
   const [contact, setContact] = useState({
@@ -27,6 +28,7 @@ const Contact = () => {
   return (
     <>
       <Topbar />
+      <SimpleBackdrop />
       <div className="contact-content font1 max-width-1 m-auto">
         <div className="max-width-1 m-auto mx-1">
           <h2>Feel Free to Contact Us</h2>
