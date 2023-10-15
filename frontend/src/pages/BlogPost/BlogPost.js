@@ -53,7 +53,7 @@ const Blogpost = () => {
                     value={comment}
                     onChange={(e)=>setComment(e.target.value)}
                 />
-                <button type="submit" onClick={addCommentToPost} className="btn btn-primary btn-sm my-2">
+                <button type="submit" disabled={!comment} onClick={addCommentToPost} className="btn btn-primary btn-sm my-2">
                     Add Comment
                 </button>
             </div>

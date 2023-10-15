@@ -1,29 +1,54 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoginAction } from "../../actions/userAction";
 import SimpleBackdrop from "../../components/Backdrop";
-//import { userLoginAction } from "../../actions/userAction";
 
 const Login = () => {
   const [loginUser,setLoginUser] = useState({
     email:"",
     password:""
   })
+  const [errors, setErrors] = useState({})
   const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
   const navigate = useNavigate();
 
   const loginBlogUser = (e) => {
     e.preventDefault()
-    dispatch(userLoginAction(loginUser,navigate))
+    if(validateForm()){
+      dispatch(userLoginAction(loginUser,navigate))
+    }
+  }
+
+  const validateForm = () => {
+    let isValid = true;
+    const validationErrors = {}
+
+    if(!loginUser.email){
+      validationErrors.email = 'Email is required'
+      isValid = false
+    }else if(!validateEmail(loginUser.email)){
+      validationErrors.email = 'Invalid email format'
+      isValid = false
+    }
+
+    if(!loginUser.password){
+      validationErrors.password = 'Password is required'
+      isValid = false
+    }
+
+    setErrors(validationErrors)
+    return isValid
+  }
+
+  const validateEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email)
   }
 
   return (
     <>
      <SimpleBackdrop />
-      <section className="vh-100" style={{ backgroundColor: "#eee" }}>
+      <section style={{ backgroundColor: "#eee" }}>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
@@ -38,6 +63,9 @@ const Login = () => {
                         <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
+                            <label className="form-label">
+                              Your Email
+                            </label>
                             <input
                               type="email"
                               name="email"
@@ -45,15 +73,16 @@ const Login = () => {
                               onChange={(e)=>setLoginUser({...loginUser,[e.target.name]:e.target.value})}
                               className="form-control"
                             />
-                            <label className="form-label" for="form3Example3c">
-                              Your Email
-                            </label>
+                            {errors.email && <span className="danger">{errors.email}</span>}
                           </div>
                         </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
+                            <label className="form-label">
+                              Password
+                            </label>
                             <input
                               type="password"
                               name="password"
@@ -61,9 +90,7 @@ const Login = () => {
                               onChange={(e)=>setLoginUser({...loginUser,[e.target.name]:e.target.value})}
                               className="form-control"
                             />
-                            <label className="form-label">
-                              Password
-                            </label>
+                            {errors.password && <span className="danger">{errors.password}</span>}
                           </div>
                         </div>
 
