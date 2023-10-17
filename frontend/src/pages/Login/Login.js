@@ -48,7 +48,7 @@ const Login = () => {
   return (
     <>
      <SimpleBackdrop />
-      <section style={{ backgroundColor: "#eee" }}>
+      <section style={{ backgroundColor: "#eee",height:"100vh" }}>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">

@@ -12,6 +12,7 @@ const Blogpost = () => {
     const blogData = useSelector(state=>state.blogData)
     const dispatch = useDispatch()
     const [comment, setComment] = useState("")
+    const [errors,setErrors] = useState({})
 
     const fetchBlogDetails = () => {
         dispatch(getBlogByIdAction(id))
@@ -21,10 +22,26 @@ const Blogpost = () => {
         fetchBlogDetails()
     },[id])
 
+    
+  const validateForm = () => {
+    let isValid = true;
+    const validationErrors = {}
+
+    if(!comment){
+      validationErrors.comment = 'Comment is required'
+      isValid = false
+    }
+
+    setErrors(validationErrors)
+    return isValid
+  }
+
     const addCommentToPost = async () => {
-        await dispatch(addCommentAction({comment,blogId:id}))
-        setComment("")
-        fetchBlogDetails()
+        if(validateForm()){
+            await dispatch(addCommentAction({comment,blogId:id}))
+            setComment("")
+            fetchBlogDetails()
+        }
 
     }
     
@@ -53,6 +70,7 @@ const Blogpost = () => {
                     value={comment}
                     onChange={(e)=>setComment(e.target.value)}
                 />
+                    {errors.comment && <span className="danger">{errors?.comment}</span>}
                 <button type="submit" disabled={!comment} onClick={addCommentToPost} className="btn btn-primary btn-sm my-2">
                     Add Comment
                 </button>
